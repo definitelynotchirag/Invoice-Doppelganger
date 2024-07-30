@@ -46,7 +46,7 @@ It's A Program which takes an input invoice in the form of PDF and compares it t
 1. First Clone the Repository into your local machine using git
 
     ```bash
-    git clone <REPO LINK>
+    git clone https://github.com/definitelynotchirag/Invoice-Doppelganger
     ```
 
 2. Install the required dependencies using
