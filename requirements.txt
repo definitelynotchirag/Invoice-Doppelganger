@@ -1,0 +1,11 @@
+PyPDF2
+scikit-learn
+numpy
+Pillow
+opencv-python
+pdf2image
+imagehash
+streamlit
+pdfminer.six
+lxml
+beautifulsoup4
