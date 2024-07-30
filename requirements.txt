@@ -8,4 +8,5 @@ imagehash
 streamlit
 pdfminer.six
 lxml
+pickle
 beautifulsoup4
