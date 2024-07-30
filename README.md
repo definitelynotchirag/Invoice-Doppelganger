@@ -18,7 +18,7 @@ It's A Program which takes an input invoice in the form of PDF and compares it t
 
 ## 3xSteps Process:
 
-## Step-1: Feature Extraction
+### Step-1: Feature Extraction
 - Extract Text from PDF using PyPDF2
 - Features Extracted:
     **Text, metadata, table styles from html, invoice number, date, pdf-name**
@@ -33,7 +33,7 @@ It's A Program which takes an input invoice in the form of PDF and compares it t
     5. io
 
 
-## Step-2: Calculate Similarity
+### Step-2: Calculate Similarity
 - Using Cosine Similarity between features that have being extraced between two extracted feature vectors
 
 - Using Image Similarity converting PDF into image and comparing them getting the similarities.
@@ -45,10 +45,10 @@ It's A Program which takes an input invoice in the form of PDF and compares it t
     3. numpy
     4. pdf2image
 
-## Step-3: Compare with training data
+### Step-3: Compare with training data
 -  Compare the invoice with each training data and get the most similar invoice and return the similarity
 
-## Final Step:
+### Final Step:
 -  Create A Frontend Using Streamlit
 
 ## Steps to Run into your local:
