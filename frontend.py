@@ -2,9 +2,10 @@ import streamlit as st
 import os, re
 from main import InvoiceComparer
 import time
-comparer = InvoiceComparer()
 
-st.title("Invoice Similarity Checker")
+comparer = InvoiceComparer('./models/vectorizer.pkl', './models/database.pkl', './training_data')
+
+st.title("Invoice Doppelganger")
 
 tfiles = []
 for pdfs in os.listdir("./testing_data"):
@@ -20,7 +21,6 @@ def runit():
     with st.spinner(text="In progress"):
         bar = st.progress(25)
         most_similar, similarity_score = comparer.find_most_similar(f"./testing_data/{option}")
-        os.remove('./example.html')
         print(f"Input invoice: {option}")
         print(f"Most similar invoice: {most_similar}")
         bar.progress(100)

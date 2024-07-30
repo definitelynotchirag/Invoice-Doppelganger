@@ -4,6 +4,17 @@
 
 It's A Program which takes an input invoice in the form of PDF and compares it to a database of existing invoices based on Content and Similarity.
 
+#### Similarity Metrics Used: 
+1. Structure or Style of Tables in Invoices
+2. PDF Metadata
+3. Invoice Number
+4. PDF Name
+5. Image Similarity
+6. Cosine Similarity of all Metrics
+
+### Key Features:
+- Upto 99% Similarity Reached
+- Uses Less Resources
 
 ### This Involves 3 Steps:
 
