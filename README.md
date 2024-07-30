@@ -4,7 +4,7 @@
 
 It's A Program which takes an input invoice in the form of PDF and compares it to a database of existing invoices based on Content and Similarity.
 
-#### Similarity Metrics Used: 
+### Similarity Metrics Used: 
 1. Structure or Style of Tables in Invoices
 2. PDF Metadata
 3. Invoice Number
@@ -13,11 +13,10 @@ It's A Program which takes an input invoice in the form of PDF and compares it t
 6. Cosine Similarity of all Metrics
 
 ### Key Features:
-- Upto 99% Similarity Reached
-- Uses Less Resources
+- Highly Accurate
+- Creation of Models to improve Performance
 
-### This Involves 3 Steps:
-
+## 3xSteps Process:
 
 ## Step-1: Feature Extraction
 - Extract Text from PDF using PyPDF2
@@ -57,11 +56,14 @@ It's A Program which takes an input invoice in the form of PDF and compares it t
 1. First Clone the Repository into your local machine using git
 
     ```bash
+    
     git clone https://github.com/definitelynotchirag/Invoice-Doppelganger
     ```
 
 2. Install the required dependencies using
+
     ```bash
+    
     pip3 install -r requirements.txt
     ```
 3. You are ready to run the Program
@@ -74,7 +76,9 @@ It's A Program which takes an input invoice in the form of PDF and compares it t
 
 ### 1. GUI(Streamlit)
 - Run the '**frontend.py**' through streamlit
+
     ```bash
+    
     streamlit run frontend.py
     ```
 - Input select the the invoice which you want to predict on.
@@ -83,6 +87,7 @@ It's A Program which takes an input invoice in the form of PDF and compares it t
 
 ### 2. Command-Line(Python)
 - Run the '**main.py**' using
+  
     ```bash
     python3 main.py
     ```
