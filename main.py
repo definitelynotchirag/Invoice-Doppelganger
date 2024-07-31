@@ -58,11 +58,12 @@ class InvoiceComparer:
         db_files = []
         existing_files = {entry[0] for entry in self.database}
         for file in existing_files:
-             pdf_file = re.findall(r'\b\w+\.pdf\b', file, re.IGNORECASE)
-             db_files.append(pdf_file[0])
+             path = os.path.basename(file)
+             db_files.append(path)
 
         new_files = set(os.listdir(self.training_data_path)) - set(db_files)
 
+    
         if new_files:
             print("New Training Data detected. Retraining the model...")
             self.train_model()
@@ -75,7 +76,10 @@ class InvoiceComparer:
             for page in reader.pages:
                 text += page.extract_text()
             metadata = reader.metadata
-        return text, metadata
+            
+        pdf_files = re.findall(r'\b\w+\.pdf\b', pdf_path, re.IGNORECASE)
+        
+        return text, metadata, pdf_files[0]
 
     def extract_table_style(self, pdf_path):
         # Extract table styles from PDF using pdfminer and BeautifulSoup
@@ -101,10 +105,11 @@ class InvoiceComparer:
         text = re.sub(r'[^a-zA-Z0-9\s]', '', text.lower())
         return text
 
-    def extract_features(self, text, metadata, styles):
+    def extract_features(self, text, metadata, styles, pdf_file):
         # Extract features from text and PDF metadata
         invoice_number = re.search(r'GLN (\d+)', text, re.IGNORECASE)
         date = re.search(r'\d{2}\.\d{2}\.\d{4}', text, re.IGNORECASE)
+        
 
         features = ""
         if invoice_number:
@@ -116,6 +121,8 @@ class InvoiceComparer:
         if metadata:
             features += f"Metadata: {metadata}"
 
+        if pdf_file:
+            features += f"Name: {pdf_file}"
         return features + text
 
     def pdf_to_image(self, pdf_path):
@@ -131,19 +138,19 @@ class InvoiceComparer:
 
     def add_to_database(self, pdf_path):
         # Add invoice data to the database
-        text, metadata = self.extract_text_and_metadata(pdf_path)
+        text, metadata, pdf_file = self.extract_text_and_metadata(pdf_path)
         processed_text = self.preprocess_text(text)
         styles = self.extract_table_style(pdf_path)
-        features = self.extract_features(processed_text, metadata, styles)
+        features = self.extract_features(processed_text, metadata, styles, pdf_file)
         image = self.pdf_to_image(pdf_path)
         self.database.append((pdf_path, features, image))
 
     def find_most_similar(self, input_pdf):
         # Find the most similar invoice in the database
-        input_text, input_metadata = self.extract_text_and_metadata(input_pdf)
+        input_text, input_metadata, input_pdf_file = self.extract_text_and_metadata(input_pdf)
         input_processed = self.preprocess_text(input_text)
         input_styles = self.extract_table_style(input_pdf)
-        input_features = self.extract_features(input_processed, input_metadata, input_styles)
+        input_features = self.extract_features(input_processed, input_metadata, input_styles, input_pdf_file)
         input_image = self.pdf_to_image(input_pdf)
 
         all_texts = [input_features] + [features for _, features, _ in self.database]
